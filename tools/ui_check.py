@@ -10,6 +10,9 @@ import punct, glossary
 MARK = '：／＠'
 # 글자 수로 가운데 정렬하는 맵 메뉴 칸 — 원문 앞뒤 공백(가운데 맞춤용)을 따르지 않고 번역 글자 수 그대로(하스피 «국가정보·행동종료 줄맞추기»)
 CENTERED = {'　国情報　'}
+# 게임이 «문자열 끝에서 N칸 앞»에 숫자를 써 넣는 칸 — 번역이 짧으면 끝을 전각 공백으로 원문 길이까지 채움(TSV 끝 공백은 편집 중 잘리기 쉬움)
+#   («　機スタック»: 0x80075EA4 가 끝 −5칸 자리에 숫자 → 6칸이어야 맨 앞 칸에 들어감. 5칸이면 문자열 앞 데이터를 덮음 — 하스피 «숫자 안 나옴»)
+PAD_TO_LEN = {'　機スタック'}
 
 
 def fw(s):
@@ -19,6 +22,7 @@ def fw(s):
 def finalize(jp, ko):
     k = fw(punct.squeeze(ko))
     if jp.endswith('　') and len(k) < len(jp) and jp not in CENTERED: k = k + '　' * (len(jp) - len(k))
+    if jp in PAD_TO_LEN and len(k) < len(jp): k = k + '　' * (len(jp) - len(k))
     return k
 
 

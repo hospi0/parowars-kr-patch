@@ -15,8 +15,11 @@ OFFS = [0x20, 0x884, 0xEE9, 0x163D, 0x1F3D, 0x26FA, 0x2D4F, 0x357D, 0x3A9C]
 NYAN = '냥 제국'
 # 화면 = 1줄(128) + 2줄 앞 W2 px 를 이어 화면 가운데(160)에 찍음(스테이트 47 러블리 x52+128·x180+88, 45 모아이 64·64).
 # W2 = 원문 2줄 «이름» 잉크를 8 단위로 올림(러블리 88·모아이 64 실측과 일치). 펭타·미카엘 2줄 16~ / 멍멍 2줄 0~ 은 머리글(안 보임).
-W2 = [16, 16, 112, 88, 128, 64, 128, 0, 0]
-HS = [16, 16, 128, 128, 128, 128, 128, 0, 128]          # 2줄 머리글 시작(이 열부터는 이름 아님 — 건드리지 않음)
+# ★실제 = PAW.EXE 0x8009E670 표(2줄 보이는 폭) + 코드 0x80047934: 판다(6)만 1줄 0~119 · 2줄 40열부터(하스피 «판다 다회주!화국» — 전 추정값 4·6 = 128 로 겹침)
+W2 = [16, 16, 112, 88, 88, 64, 72, 0, 0]
+L1 = [128] * 6 + [120] + [128] * 2                     # 1줄 보이는 폭
+S2 = [0] * 6 + [40] + [0] * 2                          # 2줄 보이는 시작 열
+HS = [16, 16, 128, 128, 128, 64, 128, 0, 128]          # 2줄 머리글 시작(이 열부터는 이름 아님 — 건드리지 않음)
 
 
 def unpx(raw):
@@ -24,13 +27,22 @@ def unpx(raw):
     px[:, 0::2] = a & 15; px[:, 1::2] = a >> 4; return px
 
 
-def center(new, i):
-    """이름 잉크(1줄 + 2줄 머리글 앞)를 보이는 폭 128+W2 의 가운데로 옮김(하스피 «가운데 정렬»)."""
-    cat = np.hstack([new[0:24], new[24:48, :HS[i]]]); W = 128 + W2[i]
+def center(new, i, px=None):
+    """이름 잉크를 보이는 범위(1줄 0~L1 + 2줄 S2~S2+W2)를 이은 폭의 가운데로(하스피 «가운데 정렬»). 넘치면 다시 그림."""
+    cat = np.hstack([new[0:24], new[24:48, :HS[i]]]); W = L1[i] + W2[i]
     cols = np.nonzero(cat.any(0))[0]; a, b = cols.min(), cols.max() + 1
+    if b - a > W - 2:                                   # 보이는 폭보다 넓음 → 같은 글꼴로 폭에 맞춰 다시 그림
+        l1 = px[0:24]; prof = band_kr.profile(l1)
+        rows = [y for y in range(24) if (l1[y] > 1).any()]; top = rows[0]; bh = rows[-1] - top + 1
+        hh = min(bh, 24 - top - 3)
+        m = band_kr.glyphs(band_kr.NAMES[i], hh, W - 6)
+        img = band_kr.paint(m, 24, prof, top + (hh - m.shape[0]) // 2)
+        cat = np.zeros((24, max(W, img.shape[1])), np.uint8); cat[:, :img.shape[1]] = img
+        cols = np.nonzero(cat.any(0))[0]; a, b = cols.min(), cols.max() + 1
     nx = (W - (b - a)) // 2; assert nx >= 0 and nx + (b - a) <= W, (i, a, b, W)
-    out = np.zeros_like(cat); out[:, nx:nx + b - a] = cat[:, a:b]
-    new = new.copy(); new[0:24] = out[:, :128]; new[24:48, :HS[i]] = out[:, 128:128 + HS[i]]
+    out = np.zeros((24, W), np.uint8); out[:, nx:nx + b - a] = cat[:, a:b]
+    new = new.copy(); new[0:24] = 0; new[0:24, :L1[i]] = out[:, :L1[i]]
+    new[24:48, :HS[i]] = 0; new[24:48, S2[i]:S2[i] + W2[i]] = out[:, L1[i]:]
     return new
 
 
@@ -62,7 +74,7 @@ def edits():
             img = band_kr.paint(m, 24, prof, top + (hh - m.shape[0]) // 2)
             new[0:24] = 0; new[0:24, :img.shape[1]] = img[:, :128]
             assert not px[24:48].any()
-        new = center(new, i)
+        new = center(new, i, px)
         out.append((off, 0, band_kr.pack4(new)))
         pv.append((px, new))
     return out, pv

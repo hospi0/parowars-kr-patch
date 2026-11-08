@@ -8,7 +8,7 @@
 압축 안 `readme.txt` 대로 원본 bin 에 적용하세요.
 
 - 원본 md5 : `3DA69136F93DDB712EC4DA138A35BC82`
-- 패치 후 md5 : `43ABE736E02DC2D9FEFB14866AB1EC67`
+- 패치 후 md5 : `F21C3AF1B6B0DAF1AD1E75AFCB9E2659`
 
 ## 바뀌는 것
 

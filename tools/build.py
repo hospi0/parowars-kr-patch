@@ -256,6 +256,23 @@ def main():
         bb = buf(fn); data = open(src, 'rb').read()
         bb[off:off + len(data)] = data; allow.append((fn, off, off + len(data)))
         print(fn, '평문 그림', hex(off), len(data))
+    # 그림 J 둘째 사본(MATI.BIN, 행 순서 반대 — 0x127A8 에서 행마다 −128): 맵에서 처음 도는 레벨업(하스피 «레벨업이 두벌»)
+    _lv = open('work/미리보기_그림_J/mati_lvup_new.bin', 'rb').read(); bb = buf('/DATA/MATI.BIN')
+    for r in range(2, 16):
+        o = 0x127A8 - 128 * r
+        assert bytes(bb[o:o + 40]) == FILES['/DATA/MATI.BIN'][1][0x11728 + 128 * r:0x11728 + 128 * r + 40], ('레벨업 둘째 사본 원본 아님', r)
+        bb[o:o + 40] = _lv[128 * r:128 * r + 40]; allow.append(('/DATA/MATI.BIN', o, o + 40))
+    # 3f) 냥티비 음성 자막 훅(tools/nyatv_hook.py): 안 쓰는 함수 0x8005164C 자리에 코드 + jal 두 곳
+    import nyatv_hook as NH
+    nblob, npatch, nsec, _, _, _ = NH.build()
+    bb = buf('/PAW.EXE'); EA = lambda a: a - 0x80010010 + 0x800
+    o = EA(NH.CODE); assert bytes(bb[o:o + 8]) == bytes.fromhex('c8ffbd272400b3af'), '자막 코드 자리 원본 아님'
+    bb[o:o + len(nblob)] = nblob; allow.append(('/PAW.EXE', o, o + len(nblob)))
+    for adr, w in npatch:
+        o = EA(adr); old = struct.unpack_from('<I', bb, o)[0]
+        assert old in (0x0C004D58, 0x0C02574F), ('자막 훅 자리 원본 아님', hex(adr), hex(old))
+        struct.pack_into('<I', bb, o, w); allow.append(('/PAW.EXE', o, o + 4))
+    print('냥티비 자막 훅', len(nblob), 'B · 섹터', len(nsec) // 2048)
     # 4) 범위 밖 변경 0 검사
     for fn, (new, old) in FILES.items():
         assert len(new) == len(old)
@@ -276,11 +293,19 @@ def main():
                 if sec[24:24 + len(chunk)] == chunk: continue
                 sec[24:24 + len(chunk)] = chunk; CS.fix_sector(sec)
                 g.seek((lba + s) * 2352); g.write(sec)
+        for i in range(len(nsec) // 2048):                       # 냥티비 자막 섹터 = 디스크 끝 빈 섹터(볼륨 안)
+            g.seek((NH.SUB0 + i) * 2352); sec = bytearray(g.read(2352))
+            assert sec[15] == 2 and not any(sec[24:2072]), ('자막 섹터 자리가 비어 있지 않음', NH.SUB0 + i)
+            sec[16:24] = bytes([0, 0, 8, 0, 0, 0, 8, 0]); sec[24:2072] = nsec[i * 2048:(i + 1) * 2048]; CS.fix_sector(sec)
+            g.seek((NH.SUB0 + i) * 2352); g.write(sec)
     # 6) 되읽기 검산
     f2, _, _, _, ents2 = D.read_fs(OUT); E2 = {e[0]: e for e in ents2}
     for fn, (data, _) in FILES.items():
         back = D.sector(f2, E2[fn][1], (E2[fn][2] + 2047) // 2048)[:E2[fn][2]]
         assert back == bytes(data), fn
+    with open(OUT, 'rb') as g:
+        for i in range(len(nsec) // 2048):
+            g.seek((NH.SUB0 + i) * 2352 + 24); assert g.read(2048) == nsec[i * 2048:(i + 1) * 2048], ('자막 섹터 되읽기', i)
     print('완료', OUT)
 
 

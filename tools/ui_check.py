@@ -8,6 +8,8 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import punct, glossary
 MARK = '：／＠'
+# 글자 수로 가운데 정렬하는 맵 메뉴 칸 — 원문 앞뒤 공백(가운데 맞춤용)을 따르지 않고 번역 글자 수 그대로(하스피 «국가정보·행동종료 줄맞추기»)
+CENTERED = {'　国情報　'}
 
 
 def fw(s):
@@ -16,7 +18,7 @@ def fw(s):
 
 def finalize(jp, ko):
     k = fw(punct.squeeze(ko))
-    if jp.endswith('　') and len(k) < len(jp): k = k + '　' * (len(jp) - len(k))
+    if jp.endswith('　') and len(k) < len(jp) and jp not in CENTERED: k = k + '　' * (len(jp) - len(k))
     return k
 
 
@@ -24,7 +26,7 @@ def problems(jp, ko):
     k = finalize(jp, ko); prob = []
     if len(k) > len(jp): prob.append('길이 %d>%d자' % (len(k), len(jp)))
     lead = lambda s: len(s) - len(s.lstrip('　'))
-    if jp.startswith('　') and lead(k) != lead(jp): prob.append('맨 앞 공백 %d≠%d' % (lead(k), lead(jp)))
+    if jp.startswith('　') and jp not in CENTERED and lead(k) != lead(jp): prob.append('맨 앞 공백 %d≠%d' % (lead(k), lead(jp)))
     for i, c in enumerate(jp):
         if c in MARK:
             if i >= len(k) or k[i] != c: prob.append('%s 자리 %d' % (c, i)); break

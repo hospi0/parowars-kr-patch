@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 sys.stdout.reconfigure(encoding='utf-8')
 OUT = 'work/미리보기_그림_D'; os.makedirs(OUT, exist_ok=True)
-FONT = 'C:/claude/utils/font/nanum-gothic/NanumGothicExtraBold.ttf'
+FONT = 'C:/claude/utils/font/dohyeon/DoHyeon-Regular.ttf'      # 2026-11-08 하스피 D안(도현) — 전 나눔고딕 ExtraBold
 STRIPS = [64, 128, 192, 256, 320, 384, 448, 512]           # 하프워드 x (펭타·미카엘·아카시야·러블리·이녀석·모아이·판다·멍멍)
 NAMES = ['펭타로 왕국', '미카엘 제국', '아카시야랜드 공화국', '러블리 연방 합중국', '이녀석＆저녀석 연방 공화국', '모아이 제도 수장국', '판다 다회주의 수민 공화국', '멍멍국']
 # 원문 이름 2줄 폭(머리글 조각 앞까지) — 펭타·미카엘 2줄은 u16 부터 머리글, 바우바우 2줄은 머리글만(이름은 1줄)

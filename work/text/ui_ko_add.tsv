@@ -5,13 +5,13 @@
 /PAW.EXE	9D4	攻	공
 /PAW.EXE	9176E	帝　王	제　왕
 /PAW.EXE	91782	大統領	대통령
-/PAW.EXE	91796	首　長	수　장
-/PAW.EXE	917AA	総　理	총　리
+/PAW.EXE	91796	首　長	수장
+/PAW.EXE	917AA	総　理	총리
 /PAW.EXE	917BE	国防長官	국방장관
-/PAW.EXE	917D2	中　将	중　장
-/PAW.EXE	917E6	大　佐	대　령
-/PAW.EXE	917FA	少　佐	소　령
-/PAW.EXE	9180E	中　尉	중　위
+/PAW.EXE	917D2	中　将	중장
+/PAW.EXE	917E6	大　佐	대령
+/PAW.EXE	917FA	少　佐	소령
+/PAW.EXE	9180E	中　尉	중위
 /PAW.EXE	9184E	工場	공장
 /PAW.EXE	91862	基地	기지
 /PAW.EXE	9186C	都市	도시
@@ -50,7 +50,7 @@
 /PAW.EXE	B3194	陸	육
 /PAW.EXE	B3198	空	공
 /PAW.EXE	B327C	発見	발견
-/PAW.EXE	A87BC	地位	직급
+/PAW.EXE	A87BC	地位	계급
 /DATA/INFO_OV.BIN	F28	草	풀
 /DATA/INFO_OV.BIN	F24	森	숲
 /DATA/INFO_OV.BIN	F20	土	흙

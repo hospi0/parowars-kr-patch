@@ -276,6 +276,20 @@ def main():
         bb[off:off + len(data)] = data; allow.append((fn, off, off + len(data)))
         print(fn, '평문 그림', hex(off), len(data))
     # 그림 J: 회전 12장 전체(띠 3개, tools/lvup_rot_kr.py) — 예전 «둘째 사본»은 실제로 띠1 의 뒤집힌 프레임이었음(하스피 «돌아가는 프레임마다»)
+    # 3e-2) 그림 L 전투 결과 큰 글자(BTLEND WIN «이겼다!!»·LOS «졌다!!», tools/btlend_kr.py) — 같은 묶음 글자 쪽은 원본 바이트 같음 확인 뒤 통째로
+    import btlend_kr as BK, glob as _g
+    for kind in ('WIN', 'LOS'):
+        pg0, pg1n, pal_, pcs_, _x, pg2o, pg2n, _n = BK.build(kind)
+        for path in sorted(_g.glob('work/files/DATA/BTLEND/%s*.BIN' % kind)):
+            fn = '/DATA/BTLEND/' + os.path.basename(path); bb = buf(fn); orig = FILES[fn][1]
+            assert orig[0x200:0x8200] == pg0.tobytes(), ('승패 글자 쪽 원본 다름', fn)
+            bb[0x200:0x8200] = pg1n.tobytes(); allow.append((fn, 0x200, 0x8200))
+            sx, sy, w, h, u, v, _a, _b = pcs_[2]; uu = u - 128
+            for y in range(h):
+                o = 0x8200 + (v + y) * 128 + uu
+                assert orig[o:o + w] == pg2o[v + y, uu:uu + w].tobytes(), ('«!!» 조각 원본 다름', fn, y)
+                bb[o:o + w] = pg2n[v + y, uu:uu + w].tobytes(); allow.append((fn, o, o + w))
+        print('승패 큰 글자', kind, len(_g.glob('work/files/DATA/BTLEND/%s*.BIN' % kind)), '파일')
     # 3f) 냥티비 음성 자막 훅(tools/nyatv_hook.py): 글꼴 한자 끝 21칸 자리에 토막 + jal 두 곳(본 코드는 디스크 섹터 → 커널 RAM). ⛔게임 함수 자리 금지 — 0x8005164C(아이템)·0x80033424(이어하기) 둘 다 실제로 불림
     import nyatv_hook as NH
     nblob, npatch, nsec, _, _ = NH.build()

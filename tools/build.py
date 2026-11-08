@@ -157,7 +157,8 @@ def main():
     # 1) 코드표(이름 + UI 고정 칸)
     isk = lambda c: '가' <= c <= '힣' or c in story.LIG
     syl = sorted(set(c for t in [k[2] for k in K] + [u[3] for u in U] + SK for c in story.norm(punct.squeeze(t)) if isk(c)))
-    free = free_kanji(used_chars())
+    import nyatv_hook as NH
+    free = [c for c in free_kanji(used_chars()) if c not in NH.CAVE_CODES]   # 끝 21칸 = 냥티비 자막 코드 자리
     assert len(syl) <= len(free), (len(syl), len(free))
     kmap = dict(zip(syl, free))
     with open('work/text/kcode.tsv', 'w', encoding='utf-8') as o:
@@ -213,6 +214,24 @@ def main():
     SW, sbad, sskip = story.plan(lambda t: encode(t, kmap, laid=True))
     assert not sbad, ('이야기 배치 실패', sbad[:5])
     print('이야기 보류(따로 처리):', sskip)
+    # 전투 대사(X_*·BAKU)의 «…»(0x8163)은 그 화면에서 줄이 꺾임(하스피 스샷 «…구흑!» 셋째 줄) — 원본 전투 대사엔 0x8163 이 없다.
+    #   → 빈 한자 한 칸에 같은 한국식 말줄임표를 그려 그 코드로 바꿈.
+    ELL2 = free[len(syl)]; assert ELL2 not in NH.CAVE_CODES
+    gi = glyph_index(exe, ELL2); p = FONT + gi * 18; exe[p:p + 18] = draw('…', ELLIPSIS); allow.append(('/PAW.EXE', p, p + 18))
+    def _ell2(b):
+        b = bytearray(b); i = 0
+        while i < len(b):
+            if b[i] >= 0x81 and i + 1 < len(b):
+                if b[i] == 0x81 and b[i + 1] == 0x63: b[i:i + 2] = bytes([ELL2 >> 8, ELL2 & 0xFF])
+                i += 2
+            else: i += 1
+        return bytes(b)
+    import re as _re
+    nell = 0
+    for key in list(SW):
+        if _re.search(r'(/X_[A-Z]+\.BIN|/BAKU\d*\.BIN)$', key):
+            new_ = [(o, _ell2(b)) for o, b in SW[key]]; nell += sum(a[1] != b_[1] for a, b_ in zip(SW[key], new_)); SW[key] = new_
+    print('전투 대사 말줄임표 바꿈', nell, '곳 → 코드', hex(ELL2))
     disk = {fn.replace('/', '_')[1:]: fn for fn in E}
     gfx = {(fn, coff): edits for fn, coff, edits in GFX}
     for key, ws in SW.items():
@@ -250,27 +269,22 @@ def main():
     # 3e) 평문 그림 교체(압축 아님): (파일, 위치, 새 바이트 파일) — 크기 그대로 제자리
     PLAIN = [('/DATA/FIX.BIN', 0xC000, 'work/미리보기_그림_G/fix_C000_new.bin'),       # 묶음 G 상태 줄 나라 이름(VRAM 672,384 4비트)
              ('/DATA/MCWGRPH.BIN', 0xC000, 'work/미리보기_그림_H/mcw_C000_new.bin'),   # 묶음 H 세이브 칸 라벨(VRAM 928,0 4비트)
-             ('/DATA/MATI.BIN', 0x11728, 'work/미리보기_그림_J/mati_lvup_new.bin'),        # 그림 J 레벨업(행 순서 거꾸로 저장, 정방향 16줄×128 B)
+             ('/DATA/MATI.BIN', 0x11728, 'work/미리보기_그림_J/lvup_rot_new.bin'),        # 그림 J 레벨업(행 순서 거꾸로 저장, 정방향 16줄×128 B)
              ] + [('/DATA/MTIT/MTIT%d.BIN' % k, 0, 'work/미리보기_그림_F/MTIT%d_new.BIN' % k) for k in range(1, 13)]   # 묶음 F 이벤트 제목(그림+배치표 통째)
     for fn, off, src in PLAIN:
         bb = buf(fn); data = open(src, 'rb').read()
         bb[off:off + len(data)] = data; allow.append((fn, off, off + len(data)))
         print(fn, '평문 그림', hex(off), len(data))
-    # 그림 J 둘째 사본(MATI.BIN, 행 순서 반대 — 0x127A8 에서 행마다 −128): 맵에서 처음 도는 레벨업(하스피 «레벨업이 두벌»)
-    _lv = open('work/미리보기_그림_J/mati_lvup_new.bin', 'rb').read(); bb = buf('/DATA/MATI.BIN')
-    for r in range(2, 16):
-        o = 0x127A8 - 128 * r
-        assert bytes(bb[o:o + 40]) == FILES['/DATA/MATI.BIN'][1][0x11728 + 128 * r:0x11728 + 128 * r + 40], ('레벨업 둘째 사본 원본 아님', r)
-        bb[o:o + 40] = _lv[128 * r:128 * r + 40]; allow.append(('/DATA/MATI.BIN', o, o + 40))
-    # 3f) 냥티비 음성 자막 훅(tools/nyatv_hook.py): 안 쓰는 함수 0x8005164C 자리에 코드 + jal 두 곳
+    # 그림 J: 회전 12장 전체(띠 3개, tools/lvup_rot_kr.py) — 예전 «둘째 사본»은 실제로 띠1 의 뒤집힌 프레임이었음(하스피 «돌아가는 프레임마다»)
+    # 3f) 냥티비 음성 자막 훅(tools/nyatv_hook.py): 글꼴 한자 끝 21칸 자리에 토막 + jal 두 곳(본 코드는 디스크 섹터 → 커널 RAM). ⛔게임 함수 자리 금지 — 0x8005164C(아이템)·0x80033424(이어하기) 둘 다 실제로 불림
     import nyatv_hook as NH
-    nblob, npatch, nsec, _, _, _ = NH.build()
+    nblob, npatch, nsec, _, _ = NH.build()
     bb = buf('/PAW.EXE'); EA = lambda a: a - 0x80010010 + 0x800
-    o = EA(NH.CODE); assert bytes(bb[o:o + 8]) == bytes.fromhex('c8ffbd272400b3af'), '자막 코드 자리 원본 아님'
+    o = EA(NH.CODE); assert not any(a <= o < b or o <= a < o + len(nblob) for f_, a, b in allow if f_ == '/PAW.EXE'), '자막 코드 자리가 다른 쓰기와 겹침'
     bb[o:o + len(nblob)] = nblob; allow.append(('/PAW.EXE', o, o + len(nblob)))
     for adr, w in npatch:
         o = EA(adr); old = struct.unpack_from('<I', bb, o)[0]
-        assert old in (0x0C004D58, 0x0C02574F), ('자막 훅 자리 원본 아님', hex(adr), hex(old))
+        assert old in (0x0C004D58, 0x0C02574F, 0x0C008FAF), ('자막 훅 자리 원본 아님', hex(adr), hex(old))
         struct.pack_into('<I', bb, o, w); allow.append(('/PAW.EXE', o, o + 4))
     print('냥티비 자막 훅', len(nblob), 'B · 섹터', len(nsec) // 2048)
     # 4) 범위 밖 변경 0 검사

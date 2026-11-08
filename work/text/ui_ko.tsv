@@ -1,0 +1,81 @@
+#파일	위치	원문	한글 — 고정 칸 제자리(원문 바이트 이하, 남는 바이트 0). 버튼 띠는 전각 공백 자리 그대로(아이콘 위치).
+/DATA/BUTAI_OV.BIN	23A0	ペンタロウ王国	펭타로 왕국
+/DATA/BUTAI_OV.BIN	23B8	ミカエル帝国	미카엘 제국
+/DATA/BUTAI_OV.BIN	23D0	アカシヤランド共和国	아카시야랜드공화국
+/DATA/BUTAI_OV.BIN	23E8	ラブリー連邦合衆国	러블리연방합중국
+/DATA/BUTAI_OV.BIN	2400	こいつ＆あいつ共和国	이녀석＆저녀석공화국
+/DATA/BUTAI_OV.BIN	2418	モアイ諸島首長国	모아이제도수장국
+/DATA/BUTAI_OV.BIN	2430	パンダ茶会獣民共和国	판다다회수민공화국
+/DATA/BUTAI_OV.BIN	2448	バウバウ国	멍멍국
+/DATA/BUTAI_OV.BIN	2460	ニャー帝国	냥 제국
+/DATA/BUTAI_OV.BIN	24AC	　　　弾数	　　　탄수
+/DATA/BUTAI_OV.BIN	24C4	機　数	기　수
+/DATA/BUTAI_OV.BIN	2500	　　移動力	　　이동력
+/DATA/BUTAI_OV.BIN	2518	機　数	기　수
+/DATA/BUTAI_OV.BIN	2574	燃料	연료
+/DATA/BUTAI_OV.BIN	2594	海　　	해
+/DATA/BUTAI_OV.BIN	259C	陸　　	육
+/DATA/BUTAI_OV.BIN	25A4	空　　	공
+/DATA/BUTAI_OV.BIN	25AC	防　御：	방　어：
+/DATA/BUTAI_OV.BIN	2604	アイテム	아이템
+/DATA/BUTAI_OV.BIN	2610	根性	근성
+/DATA/BUTAI_OV.BIN	2618	直感	직감
+/DATA/BUTAI_OV.BIN	2620	命中	명중
+/DATA/BUTAI_OV.BIN	2628	海指	해전
+/DATA/BUTAI_OV.BIN	2630	陸指	육전
+/DATA/BUTAI_OV.BIN	2638	空指	공전
+/DATA/BUTAI_OV.BIN	2640	レベル	레벨
+/DATA/BUTAI_OV.BIN	2648	機種別	기종별
+/DATA/BUTAI_OV.BIN	2674	個数	개수
+/DATA/BUTAI_OV.BIN	267C	根性	근성
+/DATA/BUTAI_OV.BIN	2684	直感	직감
+/DATA/BUTAI_OV.BIN	268C	命中	명중
+/DATA/BUTAI_OV.BIN	2694	海指	해전
+/DATA/BUTAI_OV.BIN	269C	陸指	육전
+/DATA/BUTAI_OV.BIN	26A4	空指	공전
+/DATA/BUTAI_OV.BIN	2798	搭乗中	탑승중
+/DATA/BUTAI_OV.BIN	27A0	あ　り	있　음
+/DATA/BUTAI_OV.BIN	27A8	な　し	없　음
+/DATA/BUTAI_OV.BIN	27B0	迎　撃	요　격
+/DATA/BUTAI_OV.BIN	27B8	防　衛	방　위
+/DATA/BUTAI_OV.BIN	27C0	護　衛	호　위
+/DATA/BUTAI_OV.BIN	27C8	占　領	점　령
+/DATA/BUTAI_OV.BIN	27D0	戦　闘	전　투
+/DATA/BUTAI_OV.BIN	27D8	目的地	목적지
+/DATA/BUTAI_OV.BIN	27E0	　　　次ページ　　移動　　情報　　順変更　　戻る	　　　다음쪽　　　이동　　정보　　순서　　　뒤로
+/DATA/BUTAI_OV.BIN	2814	部隊表　　　　　　移動　　情報　　順変更　　戻る	부대표　　　　　　이동　　정보　　순서　　　뒤로
+/DATA/BUTAI_OV.BIN	2848	部隊表　　　　次ページ　　情報　　順変更　　戻る	부대표　　　　다음쪽　　　정보　　순서　　　뒤로
+/DATA/BUTAI_OV.BIN	287C	部隊表　　　　　　　　　　情報　　順変更　　戻る	부대표　　　　　　　　　　정보　　순서　　　뒤로
+/DATA/BUTAI_OV.BIN	28D8	作戦	작전
+/DATA/BUTAI_OV.BIN	28E0	種別	종류
+/DATA/BUTAI_OV.BIN	28E8	兵器名	병기명
+/DATA/BUTAI_OV.BIN	2A40	名前	이름
+/DATA/BUTAI_OV.BIN	2C7C	スクリュー	스크루
+/DATA/BUTAI_OV.BIN	2C88	オーラボム	오라봄
+/DATA/BUTAI_OV.BIN	2C94	レインボー	레인보
+/DATA/BUTAI_OV.BIN	2CA0	ド根性玉	근성구슬
+/DATA/BUTAI_OV.BIN	2CAC	エンジン	엔진
+/DATA/BUTAI_OV.BIN	2CB8	バズーカ	바주카
+/DATA/BUTAI_OV.BIN	2CC4	地　雷	지　뢰
+/DATA/BUTAI_OV.BIN	2CCC	トップガン	탑건
+/DATA/BUTAI_OV.BIN	2CE0	ファイヤー	파이어
+/DATA/BUTAI_OV.BIN	2CF8	作戦	작전
+/DATA/BEND_OV.BIN	1BA0	聖はいを手に入れた！	성배를 입수했다!
+/DATA/LOCEX_OV.BIN	3934	回収します？	회수할까요?
+/DATA/OPT_OV.BIN	1408	バトル音声　　　ＯＮ	배틀음성　　　　ＯＮ
+/DATA/OPT_OV.BIN	1440	ニャンＴＶ　　　ＯＮ	냥ＴＶ　　　　　ＯＮ
+/DATA/OPT_OV.BIN	147C	スクエア　　くっきり	스퀘어　　　뚜렷하게
+/DATA/OPT_OV.BIN	14CC	カーソル音　　　ＯＮ	커서음　　　　　ＯＮ
+/DATA/OPT_OV.BIN	1504	窓カーソル　　きおく	창커서　　　　기억함
+/DATA/OPT_OV.BIN	16AC	負け	패배
+/PAW.EXE	90D6A	ヒップアップＺ	힙업Z
+/PAW.EXE	9189E	ヤシの木	야자수
+/PAW.EXE	A7368	すでにみきってる！！	이미 간파했다!!
+/PAW.EXE	A7598	アニメ　ＯＮ	애니　　ＯＮ
+/PAW.EXE	A877C	スペシャル	스페셜
+/PAW.EXE	A8B34	なしよ！！	없어!!
+/PAW.EXE	A94B8	バトルアニメ　　ＯＮ	배틀애니　　　　ＯＮ
+/PAW.EXE	A94F0	反撃行動　　　えらぶ	반격행동　　　선택함
+/PAW.EXE	A9530	テレポーテーション　あと　回	텔레포테이션　　　　남은　회
+/PAW.EXE	A978C	最終形態になった	최종형태가 됐다
+/PAW.EXE	A987C	ビックバイパー	빅바이퍼

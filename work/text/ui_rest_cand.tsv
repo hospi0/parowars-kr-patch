@@ -1,0 +1,21 @@
+20
+/PAW.EXE	89C	8	移動範囲
+/PAW.EXE	107B8	4	成博
+/PAW.EXE	1E21E	4	Ζ慮
+/PAW.EXE	1E226	4	愛霧
+/PAW.EXE	251FA	4	Ζ稼
+/PAW.EXE	3B701	4	守掘
+/PAW.EXE	3B751	4	守掘
+/PAW.EXE	9197C	4	山（
+/PAW.EXE	A8A40	42	機　数　　　？／　　　＠移動力　　　　　　
+/PAW.EXE	A8FF0	50	指揮官選択　　　次ページ　　決定　　兵器表　　戻る
+/PAW.EXE	A9628	8	配置ＯＫ
+/PAW.EXE	A964C	10	　機輸送中
+/DATA/LOCEX_OV.BIN	376C	48	兵器情報　　　　　：次ページ　　：解説　　：戻る
+/DATA/PROD_OV.BIN	23A4	48	兵器情報　　　　　：次ページ　　：解説　　：戻る
+/DATA/PROD_OV.BIN	2424	50	兵器生産　　　　　：次ページ　　　：生産　　：情報
+/DATA/PROD_OV.BIN	3104	8	（占領）
+/DATA/MEMCARD.BIN	14	8	バウバウ
+/DATA/MEMCARD.BIN	120	6	ロード
+/DATA/MEMCARD.BIN	2E4	44	　　：選択　　：決定　　：戻る　　：消去操作
+/DATA/MEMCARD.BIN	E73E	4	１燃

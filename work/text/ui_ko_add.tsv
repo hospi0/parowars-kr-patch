@@ -1,0 +1,123 @@
+#파일	위치	원문	한글	최대바이트(칸 간격 안으로 늘릴 때만) — 2026-11-08 짧은 낱말 누락분(앞 바이트가 0 이 아니거나 2바이트 정렬·찌꺼기 판정으로 빠진 칸)
+/PAW.EXE	9D0	防	방
+/PAW.EXE	9D4	攻	공
+/PAW.EXE	9176E	帝　王	제　왕
+/PAW.EXE	91782	大統領	대통령
+/PAW.EXE	91796	首　長	수　장
+/PAW.EXE	917AA	総　理	총　리
+/PAW.EXE	917BE	国防長官	국방장관
+/PAW.EXE	917D2	中　将	중　장
+/PAW.EXE	917E6	大　佐	대　령
+/PAW.EXE	917FA	少　佐	소　령
+/PAW.EXE	9180E	中　尉	중　위
+/PAW.EXE	9184E	工場	공장
+/PAW.EXE	91862	基地	기지
+/PAW.EXE	9186C	都市	도시
+/PAW.EXE	91876	空港	공항
+/PAW.EXE	9188A	港	항구	4
+/PAW.EXE	918B2	破壊基地	폐허
+/PAW.EXE	91932	橋	다리	4
+/PAW.EXE	9193E	川	강
+/PAW.EXE	919A0	海	바다	4
+/PAW.EXE	91A0C	川	강
+/PAW.EXE	91BE0	です	
+/PAW.EXE	91BE8	だね	
+/PAW.EXE	91BF0	だな	
+/PAW.EXE	91C00	かな	
+/PAW.EXE	91C08	だよ	
+/PAW.EXE	91C10	でポン	
+/PAW.EXE	91C18	だ！	
+/PAW.EXE	91C20	っす！	
+/PAW.EXE	91C28	ね	
+/PAW.EXE	91C30	よ	
+/PAW.EXE	91C38	よ！	
+/PAW.EXE	91C40	で～す	
+/PAW.EXE	91C48	と思う	
+/PAW.EXE	91C50	でしょ	
+/PAW.EXE	91C58	だろう	
+/PAW.EXE	91C60	だぜ	
+/PAW.EXE	91C68	だもん	
+/PAW.EXE	91C70	っぽい	
+/PAW.EXE	91C78	らしい	
+/PAW.EXE	B308C	山	산
+/PAW.EXE	B3180	残	탄
+/PAW.EXE	B3184	距	거
+/PAW.EXE	B3188	極	극
+/PAW.EXE	B318C	潜	잠
+/PAW.EXE	B3190	海	해
+/PAW.EXE	B3194	陸	육
+/PAW.EXE	B3198	空	공
+/PAW.EXE	B327C	発見	발견
+/PAW.EXE	A87BC	地位	직급
+/DATA/INFO_OV.BIN	F28	草	풀
+/DATA/INFO_OV.BIN	F24	森	숲
+/DATA/INFO_OV.BIN	F20	土	흙
+/DATA/INFO_OV.BIN	F1C	砂	사
+/DATA/INFO_OV.BIN	F18	岩	암
+/DATA/INFO_OV.BIN	F14	岸	안
+/DATA/INFO_OV.BIN	F10	海	해
+/DATA/INFO_OV.BIN	F08	氷	빙
+/DATA/INFO_OV.BIN	F04	橋	교
+/DATA/INFO_OV.BIN	F00	道	길
+/DATA/INFO_OV.BIN	EFC	川	강
+/DATA/INFO_OV.BIN	EF8	建	건
+/DATA/LOCEX_OV.BIN	3924	草	풀
+/DATA/LOCEX_OV.BIN	3920	森	숲
+/DATA/LOCEX_OV.BIN	391C	土	흙
+/DATA/LOCEX_OV.BIN	3918	砂	사
+/DATA/LOCEX_OV.BIN	3914	岩	암
+/DATA/LOCEX_OV.BIN	3910	岸	안
+/DATA/LOCEX_OV.BIN	390C	海	해
+/DATA/LOCEX_OV.BIN	3904	氷	빙
+/DATA/LOCEX_OV.BIN	3900	橋	교
+/DATA/LOCEX_OV.BIN	38FC	道	길
+/DATA/LOCEX_OV.BIN	38F8	川	강
+/DATA/LOCEX_OV.BIN	38F4	建	건
+/DATA/LOCEX_OV.BIN	3688	港	항
+/DATA/PROD_OV.BIN	2A8C	草	풀
+/DATA/PROD_OV.BIN	2A88	森	숲
+/DATA/PROD_OV.BIN	2A84	土	흙
+/DATA/PROD_OV.BIN	2A80	砂	사
+/DATA/PROD_OV.BIN	2A7C	岩	암
+/DATA/PROD_OV.BIN	2A78	岸	안
+/DATA/PROD_OV.BIN	2A74	海	해
+/DATA/PROD_OV.BIN	2A6C	氷	빙
+/DATA/PROD_OV.BIN	2A68	橋	교
+/DATA/PROD_OV.BIN	2A64	道	길
+/DATA/PROD_OV.BIN	2A60	川	강
+/DATA/PROD_OV.BIN	2A5C	建	건
+/DATA/PROD_OV.BIN	290C	　生産指定　　　：増減　　：決定　　：中止	　생산 지정　　：증감　　：결정　　：중지
+/DATA/CNTRY_ST.BIN	5BC	港	항
+/DATA/CNTRY_ST.BIN	5C8	都市	도시
+/DATA/CNTRY_ST.BIN	9F0	ミカエル	미카엘
+/DATA/CNTRY_ST.BIN	A08	ペンタロウ	펭타로
+/DATA/MEMCARD.BIN	5C	ミカエル	미카엘
+/DATA/MEMCARD.BIN	62C	ファイル情報をロードしています	파일 정보 불러오는 중
+/DATA/OPT_OV.BIN	1334	スクロール	스크롤
+/DATA/OPT_OV.BIN	16FC	ミカエル	미카엘
+/DATA/OPT_OV.BIN	1708	ペンタロウ	펭타로
+/PAW.EXE	B2F94	は	
+/PAW.EXE	B2F98	は	
+/PAW.EXE	B3388	は	
+/PAW.EXE	91BF8	？	
+/PAW.EXE	91CD0	～	
+/PAW.EXE	91CD8	耐えてみせます！！	버텨 보이겠어！！
+/PAW.EXE	91CEC	なすすべなし	속수무책
+/PAW.EXE	91D00	手も足もでません	꼼짝도 못 해
+/PAW.EXE	91D14	なにもできません	아무것도 못 해
+/PAW.EXE	91D28	ひきょうもの！！	비겁한 놈！！
+/PAW.EXE	91D3C	あとでみてろよ	두고 보자
+/PAW.EXE	91D50	反撃できません	반격 불가
+/PAW.EXE	91D64	お手あげです	손들었다
+/PAW.EXE	91D78	こりゃまいった	이거 곤란한데
+/PAW.EXE	9197C	山（	산（
+/PAW.EXE	A8A40	機　数　　　？／　　　＠移動力　　　　　　	기　수　　　？／　　　＠이동력　　　　　　
+/PAW.EXE	A8FF0	指揮官選択　　　次ページ　　決定　　兵器表　　戻る	지휘관 선택　　다음쪽　　　결정　　병기표　　뒤로
+/PAW.EXE	A9628	配置ＯＫ	배치OK
+/DATA/LOCEX_OV.BIN	376C	兵器情報　　　　　：次ページ　　：解説　　：戻る	병기 정보　　　　：다음쪽　　　：해설　　：뒤로
+/DATA/PROD_OV.BIN	23A4	兵器情報　　　　　：次ページ　　：解説　　：戻る	병기 정보　　　　：다음쪽　　　：해설　　：뒤로
+/DATA/PROD_OV.BIN	2424	兵器生産　　　　　：次ページ　　　：生産　　：情報	병기 생산　　　　：다음쪽　　　　：생산　　：정보
+/DATA/PROD_OV.BIN	3104	（占領）	（점령）
+/DATA/MEMCARD.BIN	14	バウバウ	멍멍국
+/DATA/MEMCARD.BIN	120	ロード	로드
+/DATA/MEMCARD.BIN	2E4	　　：選択　　：決定　　：戻る　　：消去操作	　　：선택　　：결정　　：뒤로　　：삭제
